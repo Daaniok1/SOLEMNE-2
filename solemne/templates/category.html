@@ -1,0 +1,271 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<!DOCTYPE html>
+
+<!-- Comienzo HTML-->
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}El rincón de Souza{% endblock title %}</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Estilo.css -->
+    <link href="{% static 'css/estilo.css' %}" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/soscial/bootstrap-social.css' %}" rel="stylesheet">
+
+    <!-- Fuentes Web-->
+    <link href="https://fonts.googleapis.com/css?family=Graduate|Pacifico" rel="stylesheet" type="text/css">
+
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- Cuerpo-->
+
+<body id="Sp">
+
+    <!-- Barra de búsqueda -->
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+                <div class="navbar-header">
+                    <buttom type="buttom" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </buttom>
+                    <a href="#" class="navbar-brand" id="links">El Rincón de Souza</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right" id="links">
+                        <li><a href="Home.html">Home</a></li>
+                        <li class="active"><a href="Category.html">Categoria</a></li>
+                        <li><a href="Product.html">Producto</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Carrito<span class="caret"></span></a> 
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" data-toggle="modal" data-target="#Login">Acceder</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#Signup">Registrarse</a></li>
+                            </ul>                
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Fin Barra de búsqueda -->
+
+    <!-- Contenedor Section -->
+    <section class="container">
+
+        <div class="container">
+            <div class="navbar-header navbar-nav navbar-right">
+                <form class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar..">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <!-- Comienzo Aside -->
+            <aside class="col-md-3 hidden-xs">
+                <h4>Filtrar por:</h4>
+                <div class="list-group">
+                    <a href="#" class="list-group-item">Popularidad</a>
+                    <a href="#" class="list-group-item">Precio Menor</a>
+                    <a href="#" class="list-group-item">Precio Mayor</a>
+                </div>
+            </aside>
+            <!-- Fin Aside -->
+
+            <article class="col-md-9">
+                {% for product in products %}
+                <div class="col-md-4 col-sm-6">
+
+                    <div class="thumbnail">
+                        <div class="photo">
+                            {% thumbnail product.image "350x260" crop="center" as im %}
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+                            {% endthumbnail %}                          
+                        </div>
+                        <div class="caption-full">
+                            <h4 class="pull-right">{{product.price}}</h4>
+                            <h4><a href="Product.html">{{product.name}}</a></h4>
+                            <buttom class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#carrito">Añadir al carro
+                            </buttom>
+                        </div>
+                        <div class="valora">
+                            <p class="pull-right">3 comentarios</p>
+                            <p>
+                               <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                4.0
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </article>
+        </div>
+    </section>
+    <!-- Fin Contenedor Section -->
+
+    <!-- Contenedor Footer-->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4">
+                    <p>&copy; El rincón del tío Souza Inc.</p>
+                </div>
+                <div class="col-xs-8">
+                    <div class="text-right">
+                        <h4>Encuéntranos en:</h4>
+                    </div>
+                    <div class="list-inline text-right">
+                        <a href="#" class="btn btn-social-icon btn-lg btn-facebook"><span class="fa fa-facebook"></span></a>
+                        <a href="#" class="btn btn-social-icon btn-lg btn-twitter"><span class="fa fa-twitter"></span></a>
+                        <a href="#" class="btn btn-social-icon btn-lg btn-instagram"><span class="fa fa-instagram"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Fin Contenedor Footer -->
+
+    <!--Inicio "añadir al carro" -->
+    <div class="modal fade" id="carrito" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Añadido al carro!</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>      
+    </div>
+    
+    <!-- Fin "Añadir al carro" -->
+
+    <!-- Inicio Formulario Acceder -->
+    <div class="modal fade" id="Login">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                   <a href="https://facebook.com" class="btn btn-primary btn-block" role="buttom">
+                        <i class="fa fa-facebook"> Iniciar sesión con Facebook</i>
+                    </a>
+                    <a href="https://twitter.com" class="btn btn-info btn-block" role="buttom">
+                       <i class="fa fa-twitter"> Iniciar sesión con Twitter</i>
+                    </a>
+                    <a href="https://plus.google.com/collections/featured" class="btn btn-danger btn-block" role="buttom">
+                       <i class="fa fa-google"> Iniciar sesión con Google</i>
+                    </a>
+                </div>
+
+                <div class="modal-body">
+                    <p id="formtxt">o también</p>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="Ingresa tu email">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Ingresa tu contraseña">
+                        </div>
+                        <div class="form-group">
+                            <buttom type="submit" class="btn btn-success btn-block">Iniciar sesión</buttom>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <p><a href="">Has olvidado tu contraseña?</a></p>
+                    <p><a href="" data-toggle="modal" data-target="#Signup">Desea Registrarse?</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Fin Formulario Acceder -->
+
+    <!-- Inicio Formulario Registrarse -->
+
+    <div class="modal fade" id="Signup">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputName">Nombre de Usuario</label>
+                            <input type="text" class="form-control" id="inputName" placeholder="Ingresa un nombre de usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmailSignup">Email</label>
+                            <input type="email" class="form-control" id="inputEmailSignup" placeholder="Ingresa una direccion de correo valido">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordSignup">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPasswordSignup" placeholder="Escribe una contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPasswordSignupr">Contraseña nuevamente</label>
+                            <input type="password" class="form-control" id="inputPasswordSignupr" placeholder="Escribe de nuevo tu contraseña">
+                        </div>
+                        <buttom type="submit" class="btn btn-success btn-block">Registrate</buttom>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <p>Al registrarme, <a href="">Acepto los Términos de Uso</a> y <a href="">La Política de Privacidad</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Fin Formulario Registrarse -->
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+<!-- Fin Cuerpo-->
+
+</html>
+<!-- Fin HTML-->
