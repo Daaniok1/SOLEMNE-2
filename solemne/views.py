@@ -1,6 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from solemne.models import Brand, Category, Product
+
+def home(request):
+
+    products = Product.objects.filter(status=1)
+    
+    return render(request, 'home.html', {'products':products})
+
 
 def category(request,category_id):
 
