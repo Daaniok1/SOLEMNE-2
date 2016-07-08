@@ -1,0 +1,227 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+
+<!DOCTYPE html>
+
+<!-- Comienzo HTML-->
+<html lang="es">
+
+<head>
+
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="">
+
+   <title>{% block title %}El rincón de Souza{% endblock %}</title>
+   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+   <!-- Estilo.css -->
+   <link href="{% static 'css/estilo.css' %}" rel="stylesheet">
+
+   <!-- Iconos -->
+   <link href="{% static 'css/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+   <link href="{% static 'css/soscial/bootstrap-social.css' %}" rel="stylesheet">
+
+   <!-- Fuentes Web-->
+   <link href="https://fonts.googleapis.com/css?family=Graduate|Pacifico" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- Cuerpo -->
+
+<body id="Sp">
+
+    <!-- Barra de búsqueda -->
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+                <div class="navbar-header">
+                    <buttom type="buttom" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </buttom>
+                    <a href="#" class="navbar-brand" id="links">El Rincón de Souza</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+
+                    <ul class="nav navbar-nav navbar-right" id="links">
+                        <li><a href="Home.html">Home</a></li>
+                        <li><a href="Category.html">Categoria</a></li>
+                        <li class="active"><a href="Product.html">Producto</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Carrito<span class="caret"></span></a> 
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="" data-toggle="modal" data-target="#Login">Acceder</a></li>
+                                <li><a href="" data-toggle="modal" data-target="#Signup">Registrarse</a></li>
+                            </ul>                
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Fin Barra de búsqueda -->
+
+    <!-- Contenedor Section -->
+    <section class="container">
+
+        <div class="container">
+            <div class="navbar-header navbar-nav navbar-right">
+                <form class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar..">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-md-12">
+                {% for product in products %}
+                <div class="thumbnail">
+                    <div class="photo">
+                            {% thumbnail product.image "800x300" crop="center" as im %}
+                              <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+                            {% endthumbnail %}                          
+                        </div>
+                    <div class="caption-full">
+                        <h4 class="pull-right">{{product.price}}</h4>
+                        <h4>
+                            <p>{{product.name}}</p>
+                        </h4>
+                         <buttom class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#carrito">Añadir al carro</buttom>
+                        <p>{{product.description}}</p>
+                    </div>
+                    <div class="valora">
+                        <p class="pull-right">18 reviews</p>
+                        <p>
+                           <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            5.0
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="well">
+
+                    <div class="text-right">
+                        <a class="btn btn-success">Añadir un comentario</a>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>Daniel dijo:</strong>
+                            <span class="pull-right text-muted">20 days ago</span>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>Manuel dijo:</strong>
+                            <span class="pull-right text-muted">38 days ago</span>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div id="title-enroll">
+                    <div class="jumbotron">
+                        <div class="container-fluid">
+                            <h2>Otros productos nuestros</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-3 col-sm-6">
+
+                        <div class="thumbnail">
+                            <div class="photo">
+                                {% thumbnail product.image "350x260" crop="center" as im %}
+                                  <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+                                {% endthumbnail %}                          
+                            </div>
+                            <div class="caption-full">
+                                <h4 class="pull-right">{{product.price}}</h4>
+                                <h4><a href="Product.html">{{product.name}}</a></h4>
+                                <buttom class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#carrito">Añadir al carro
+                                </buttom>
+                            </div>
+                            <div class="valora">
+                                <p class="pull-right">3 comentarios</p>
+                                <p>
+                                   <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    4.0
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                        </div>
+                    </div>
+
+                                
+                </div>
+            </div>
+
+            <section class="container">
+                <div class="row-fluid">
+                    <div class="boton hidden-xs col-sm-12">
+                        <buttom class="btn btn-lg btn-default">
+                            <a href="Category.html" class="glyphicon glyphicon-chevron-right">Más</a>
+                        </buttom>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <!-- Fin Contenedor Section -->
+
+
+    {% include "includes/footer.html" %}
+    {% include "includes/querys.html" %}
+
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+<!-- Fin Cuerpo-->
+
+</html>
+<!-- Fin HTML-->
