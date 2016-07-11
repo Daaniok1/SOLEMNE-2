@@ -35,45 +35,16 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    {% block extra_css %}{% endblock extra_css %}
+
+
 </head>
 
 <!-- Cuerpo -->
 
 <body id="Sp">
 
-    <!-- Barra de búsqueda -->
-    <header>
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-                <div class="navbar-header">
-                    <buttom type="buttom" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </buttom>
-                    <a href="#" class="navbar-brand" id="links">El Rincón de Souza</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-
-                    <ul class="nav navbar-nav navbar-right" id="links">
-                        <li><a href="Home.html">Home</a></li>
-                        <li><a href="Category.html">Categoria</a></li>
-                        <li class="active"><a href="Product.html">Producto</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Carrito<span class="caret"></span></a> 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="" data-toggle="modal" data-target="#Login">Acceder</a></li>
-                                <li><a href="" data-toggle="modal" data-target="#Signup">Registrarse</a></li>
-                            </ul>                
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <!-- Fin Barra de búsqueda -->
+    {% include "includes/header.html" %}
 
     <!-- Contenedor Section -->
     <section class="container">
@@ -87,7 +58,6 @@
         </div>
 
         <div class="row">
-            
             <div class="col-md-12">
                 {% for product in products %}
                 <div class="thumbnail">
@@ -117,6 +87,9 @@
                     </div>
                 </div>
                 {% endfor %}
+                
+
+
             </div>
 
             <div class="col-md-12 ">
@@ -160,7 +133,7 @@
 
             <div class="col-md-12">
                 <div class="row">
-                    {% for product in products %}
+                    {% for product in products|slice:"4" %}
                     <div class="col-md-3 col-sm-6">
 
                         <div class="thumbnail">
@@ -191,20 +164,11 @@
                     {% endfor %}
                         </div>
                     </div>
-
-                                
+            
                 </div>
             </div>
 
-            <section class="container">
-                <div class="row-fluid">
-                    <div class="boton hidden-xs col-sm-12">
-                        <buttom class="btn btn-lg btn-default">
-                            <a href="Category.html" class="glyphicon glyphicon-chevron-right">Más</a>
-                        </buttom>
-                    </div>
-                </div>
-            </section>
+         
         </div>
     </section>
     <!-- Fin Contenedor Section -->

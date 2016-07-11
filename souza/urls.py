@@ -23,3 +23,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^solemne/', include('solemne.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))

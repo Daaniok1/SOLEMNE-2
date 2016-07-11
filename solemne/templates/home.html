@@ -43,41 +43,7 @@
 
 <body id="Sp">
 
-    <!-- Barra de búsqueda -->
-    <header>
-        <nav class="navbar navbar-default navbar-fixed-top">
-
-            <div class="container">
-                <div class="navbar-header">
-                    <buttom type="buttom" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </buttom>
-                    <a href="#" class="navbar-brand" id="links">El Rincón de Souza</a>
-                </div>
-
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul id="links" class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="Home.html">Home</a></li>
-                        <li><a href="Category.html">Categoria</a></li>
-                        <li><a href="Product.html">Producto</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Carrito<span class="caret"></span></a> 
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="" data-toggle="modal" data-target="#Login">Acceder</a></li>
-                                <li><a href="" data-toggle="modal" data-target="#Signup">Registrarse</a></li>
-                            </ul>                
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            
-        </nav>
-    </header>
-    <!-- Fin Barra de búsqueda -->
+  {% include "includes/header.html" %}
 
     <!-- Jumbotron Inicio -->
 
@@ -95,9 +61,6 @@
             <div class="container-fluid">
                 <h1>El Rincón del tío Souza</h1>
                 <p>Disfruta los mejores platos al mejor precio</p>
-                <p>
-                    <a href="Category.html" class="btn btn-primary btn-lg">Conoce nuestros productos &raquo;</a>
-                </p>
             </div>
         </div>
     </section>
@@ -112,27 +75,44 @@
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="0"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
                             </ol>
+
+
                             <div class="carousel-inner">
-                                <div class="item active">
-                                    <img alt="First slide" src="http://www.rowleyscatering.co.uk/wp-content/uploads/2014/10/DSC_6134-1200x300.jpg">
+                            {% for product in products|slice:"3" %}
+                                {% if forloop.first %}
+                                    <div class="active item">
+                                {% else %}
+                                    <div class="item">
+                                {% endif %}
+                                
+                                <div align="center"> 
+                                <div class="photo">
+                                   {% thumbnail product.image "1200x300" crop="center" as im %}
+                                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-responsive" alt="{{product.name}}" >
+                                   {% endthumbnail %}                          
                                 </div>
-                                <div class="item">
-                                    <img alt="Second slide" src="http://www.iso.org/iso/img_ref1949_01.jpg"> 
+                                    <h3>{{product.name}}</h3>
                                 </div>
-                                <div class="item">
-                                    <img alt="Third slide" src="http://themizu.com/wp-content/uploads/2016/02/thai-food-1-1200x300.jpg">
+
                                 </div>
+                            {% endfor %}
                             </div>
+
+
+
+
+
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
                             </a>
                             <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -146,7 +126,7 @@
                 </div>
             <article class="col-md-12">
                 <div class="row">
-                   {% for product in products %}
+                   {% for product in products|slice:"4" %}
                    <div class="col-md-3 col-sm-6">
 
                        <div class="thumbnail">
@@ -157,12 +137,12 @@
                            </div>
                            <div class="caption-full">
                                <h4 class="pull-right">{{product.price}}</h4>
-                               <h4><a href="Product.html">{{product.name}}</a></h4>
+                               <h4><a href="{% url 'product' product.id %}">{{product.name}}</a></h4>
                                <buttom class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#carrito">Añadir al carro
                                </buttom>
                            </div>
                            <div class="valora">
-                               <p class="pull-right">3 comentarios</p>
+                               <p class="pull-right">2 comentarios</p>
                                <p>
                                   <span class="glyphicon glyphicon-star"></span>
                                    <span class="glyphicon glyphicon-star"></span>
@@ -180,17 +160,6 @@
         </div>
 
         <!-- /.container -->
-
-        <!-- Botón siguiente página (categorías) -->
-        <section class="container">
-            <div class="row-fluid">
-                <div class="boton hidden-xs col-sm-12">
-                    <buttom class="btn btn-lg btn-default">
-                        <a href="Category.html" class="glyphicon glyphicon-chevron-right">Más</a>
-                    </buttom>
-                </div>
-            </div>
-        </section>
 
     </section>
     <!-- Fin Contenedor Section -->

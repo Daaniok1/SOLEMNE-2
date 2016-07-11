@@ -1,5 +1,5 @@
 from __future__ import unicode_literals
-
+from sorl.thumbnail import ImageField
 from django.db import models
 
 class Brand(models.Model):
