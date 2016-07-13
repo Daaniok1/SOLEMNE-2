@@ -81,7 +81,7 @@
                             {% endthumbnail %}                          
                         </div>
                         <div class="caption-full">
-                            <h4 class="pull-right">{{product.price}}</h4>
+                            <h4 class="pull-right">${{product.price}}</h4>
                             <h4><a href="{% url 'product' product.id %}">{{product.name}}</a></h4>
                             <buttom class="btn btn-primary btn-sm"  data-toggle="modal" data-target="#carrito">Añadir al carro
                             </buttom>

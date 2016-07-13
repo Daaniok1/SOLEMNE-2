@@ -29,7 +29,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=100,unique=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
-    price = models.DecimalField(max_digits=11, decimal_places=2)
+    price = models.IntegerField()
     brand = models.ForeignKey(Brand, null=True)
     category = models.ForeignKey(Category, null=True)
     status = models.BooleanField()
